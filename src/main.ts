@@ -56,3 +56,14 @@ export class NP {
     this.idTable.flush();
   }
 }
+
+export interface NPConfig {
+  address: string;
+  peers: string[];
+}
+
+export function setupNP(config: NPConfig): NP {
+  const np = new NP(config.address);
+  config.peers.forEach((peer) => np.addPeer(peer));
+  return np;
+}
